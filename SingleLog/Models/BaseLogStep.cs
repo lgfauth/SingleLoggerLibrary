@@ -23,10 +23,6 @@ namespace SingleLog.Models
 
         [JsonIgnore]
         [Newtonsoft.Json.JsonIgnore]
-        internal Stopwatch Cronometer { get; set; }
-
-        [JsonIgnore]
-        [Newtonsoft.Json.JsonIgnore]
         internal ConcurrentDictionary<string, int> StepCount { get; set; }
 
         public BaseLogStep()
@@ -34,7 +30,6 @@ namespace SingleLog.Models
             Level = LogTypes.INFO;
             Id = Guid.NewGuid().ToString();
             TraceStep = new List<TraceLog>();
-            Cronometer = Stopwatch.StartNew();
             Steps = new ConcurrentDictionary<string, object>();
             StepCount = new ConcurrentDictionary<string, int>();
             ExecutedAt = DateConvert.ToBrazilianDateTime(DateTime.UtcNow);
@@ -94,16 +89,9 @@ namespace SingleLog.Models
 
         public async Task AddStepAsync(string baseLog, Func<SubLog> func) => await AddStepAsync(baseLog, func());
 
-        public void StopwatchStop()
-        {
-            Cronometer.Stop();
-            ElapsedMilliseconds = Cronometer.ElapsedMilliseconds;
-        }
 
         public void Dispose()
         {
-            Cronometer.Stop();
-
             if (Request != null)
                 Request = null;
 

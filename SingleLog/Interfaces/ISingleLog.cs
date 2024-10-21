@@ -4,7 +4,7 @@ using SingleLog.Utilities;
 
 namespace SingleLog.Interfaces
 {
-    public interface ISingleLog<T1, T2> where T1 : BaseLogStep where T2 : Enumeration
+    public interface ISingleLog<T1> where T1 : BaseLogStep
     {
         Task<T1> CreateBaseLogAsync();
         Task<T1> GetBaseLogAsync();

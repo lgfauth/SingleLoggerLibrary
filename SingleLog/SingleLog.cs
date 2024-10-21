@@ -5,7 +5,7 @@ using SingleLog.Utilities;
 
 namespace SingleLog
 {
-    public class SingleLog<T1, T2> : ISingleLog<T1, T2> where T1 : BaseLogStep where T2 : Enumeration
+    public class SingleLog<T1> : ISingleLog<T1> where T1 : BaseLogStep
     {
         private readonly LoggerManager _loggerManager;
         private T1? _baseLog;
@@ -27,13 +27,17 @@ namespace SingleLog
 
         public Task WriteLogAsync(LogTypes typeLog, T1 value)
         {
+            long totalTimeElepsed = 0;
+
             foreach (var step in value.Steps.Values)
             {
                 if (step is not null && step is SubLog)
                     ((SubLog)step).StopwatchStop();
+
+                totalTimeElepsed += ((SubLog)step!).ElapsedMilliseconds;
             }
 
-            value.StopwatchStop();
+            value.ElapsedMilliseconds = totalTimeElepsed;
 
             _loggerManager.WriteLog(typeLog, value);
 
