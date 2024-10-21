@@ -26,17 +26,17 @@ namespace SingleLog
 
         public Task WriteLogAsync(LogTypes typeLog, T1 value)
         {
-            long elepsedMilleseconds = 0;
+            long elapsedMilliseconds = 0;
 
             foreach (var step in value.Steps.Values)
             {
                 if (step is not null && step is SubLog)
                     ((SubLog)step).StopwatchStop();
 
-                elepsedMilleseconds += ((SubLog)step!).ElapsedMilliseconds;
+                elapsedMilliseconds += ((SubLog)step!).ElapsedMilliseconds;
             }
 
-            value.ElapsedMilliseconds = elepsedMilleseconds;
+            value.ElapsedMilliseconds = elapsedMilliseconds;
 
             _loggerManager.WriteLog(typeLog, value);
 
