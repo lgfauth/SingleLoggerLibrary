@@ -4,7 +4,7 @@ using SingleLog.Models;
 
 namespace SingleLog
 {
-    public class SingleLog<T1> : ISingleLog<T1> where T1 : BaseLogStep
+    public sealed class SingleLog<T1> : ISingleLog<T1> where T1 : BaseLogStep
     {
         private readonly LoggerManager _loggerManager;
         private T1? _baseLog;

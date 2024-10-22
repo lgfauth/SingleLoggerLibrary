@@ -5,7 +5,7 @@ using SingleLog.Utils;
 
 namespace SingleLog
 {
-    public class LoggerManager : IDisposable
+    public sealed class LoggerManager : IDisposable
     {
         private readonly Logger messageLog;
 
