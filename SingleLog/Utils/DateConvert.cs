@@ -2,10 +2,7 @@
 {
     public static class DateConvert
     {
-        public static DateTime ToBrazilianDateTime(this DateTime dateTime)
-        {
-            return ConvertToBrazilianDateTimeZone(dateTime).DateTime;
-        }
+        public static DateTime ToBrazilianDateTime(this DateTime dateTime) => ConvertToBrazilianDateTimeZone(dateTime).DateTime;
 
         private static DateTimeOffset ConvertToBrazilianDateTimeZone(DateTime dateTime) =>
             TimeZoneInfo.ConvertTime(dateTime, Environment.OSVersion.Platform == PlatformID.Win32NT ?

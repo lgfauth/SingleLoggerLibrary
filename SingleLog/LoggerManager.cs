@@ -14,11 +14,6 @@ namespace SingleLog
             message = LogManager.GetCurrentClassLogger();
         }
 
-        public void Dispose()
-        {
-            LogManager.Shutdown();
-        }
-
         public void WriteLog(LogTypes type, object obj)
         {
             JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings
@@ -48,6 +43,7 @@ namespace SingleLog
                     break;
             }
         }
-    }
 
+        public void Dispose() => LogManager.Shutdown();
+    }
 }

@@ -1,5 +1,5 @@
-﻿using System.Text.Json.Serialization;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using System.Text.Json.Serialization;
 
 namespace SingleLog.Models
 {
@@ -25,11 +25,7 @@ namespace SingleLog.Models
             StartCronometer();
         }
 
-        public void StartCronometer()
-        {
-            if (StopwatchCronometer.IsRunning)
-                StopwatchCronometer.Start();
-        }
+        public void StartCronometer() => StopwatchCronometer.Start();
 
         public void StopCronometer()
         {
@@ -37,9 +33,6 @@ namespace SingleLog.Models
             ElapsedMilliseconds = StopwatchCronometer.ElapsedMilliseconds;
         }
 
-        public void Dispose()
-        {
-            StopwatchCronometer.Stop();
-        }
+        public void Dispose() => StopwatchCronometer.Stop();
     }
 }
