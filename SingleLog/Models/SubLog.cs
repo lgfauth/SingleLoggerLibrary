@@ -12,7 +12,7 @@ namespace SingleLog.Models
         public long ElapsedMilliseconds { get; set; }
 
         [JsonIgnore]
-        internal Stopwatch Stopwatch { get; set; }
+        internal Stopwatch StopwatchCronometer { get; set; }
 
         [JsonIgnore]
         public Exception? Exception { get; set; }
@@ -20,26 +20,26 @@ namespace SingleLog.Models
         public SubLog()
         {
             ExecutedAt = DateTime.Now;
-            Stopwatch = new Stopwatch();
+            StopwatchCronometer = new Stopwatch();
 
             StartCronometer();
         }
 
         public void StartCronometer()
         {
-            if (Stopwatch.IsRunning)
-                Stopwatch.Start();
+            if (StopwatchCronometer.IsRunning)
+                StopwatchCronometer.Start();
         }
 
         public void StopCronometer()
         {
-            Stopwatch.Stop();
-            ElapsedMilliseconds = Stopwatch.ElapsedMilliseconds;
+            StopwatchCronometer.Stop();
+            ElapsedMilliseconds = StopwatchCronometer.ElapsedMilliseconds;
         }
 
         public void Dispose()
         {
-            Stopwatch.Stop();
+            StopwatchCronometer.Stop();
         }
     }
 }
